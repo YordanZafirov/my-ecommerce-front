@@ -117,7 +117,7 @@ export default function ProductReviews({ product }) {
                         <p>Няма отзиви за този продукт</p>
                     )}
                     {reviews.length > 0 && reviews.map(review => (
-                        <ReviewWrapper>
+                        <ReviewWrapper key={review._id}>
                             <ReviewHeader>
                                     <StarsRating size={'sm'} disabled={true} defaultHowMany={review.stars} />
                                     <time>{(new Date(review.createdAt)).toLocaleString('en-GB')}</time>

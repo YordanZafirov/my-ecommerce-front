@@ -56,7 +56,7 @@ export default function SearchPage() {
                         placeholder="Търсене на продукти..." />
                 </InputWrapper>
                 {!isLoading && phrase !== '' && products.length === 0 && (
-                    <h2>Няма намерен продукт "{phrase}"</h2>
+                    <h2>Няма намерен продукт &quot;{phrase}&quot;</h2>
                 )}
                 {isLoading && (
                     <Spinner fullWidth={true} />
