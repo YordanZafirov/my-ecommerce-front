@@ -217,17 +217,17 @@ export default function CartPage() {
                           </ButtonWrapper>
                         </td>
                         <td>
-                          {cartProducts.filter(id => id === product._id).length * product.price} лв.
+                          {cartProducts.filter(id => id === product._id).length * product.price.toFixed(2)} лв.
                         </td>
                       </tr>
                     ))}
                     <tr className="subtotal">
                       <td colSpan={2}>Продукти</td>
-                      <td>{productsTotal} лв.</td>
+                      <td>{productsTotal.toFixed(2)} лв.</td>
                     </tr>
                     <tr className="subtotal">
                       <td colSpan={2}>Цена на доставката</td>
-                      <td>{shippingFee} лв.</td>
+                      <td>{shippingFee.toFixed(2)} лв.</td>
                     </tr>
                     <tr className="subtotal total">
                       <td colSpan={2}>Общо</td>
