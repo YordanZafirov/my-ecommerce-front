@@ -41,30 +41,33 @@ export default async function handler(req, res) {
     const orderDoc = await Order.create({
         line_items, name, email, city,
         postalCode, streetAddress, country,
-        paid:false, 
+        paid: false,
         userEmail: session?.user?.email,
     });
 
-    const shippingFeeSetting = await Setting.findOne({name: 'shippingFee'});
-    const shippingFeeCents = parseInt(shippingFeeSetting.value || '0') * 100
+    const shippingFeeSetting = await Setting.findOne({ name: 'shippingFee' });
+    const shippingFeeCents = parseInt(shippingFeeSetting.value || '0') * 100;
+
+    const successUrl = 'my-ecommerce-front-one.vercel.app/cart?success=1';
+    const cancelUrl = 'my-ecommerce-front-one.vercel.app/cart?canceled=1';
 
     const stripeSession = await stripe.checkout.sessions.create({
         line_items,
         mode: 'payment',
         customer_email: email,
-        success_url: process.env.PUBLIC_URL + "/cart?success=1",
-        cancel_url: process.env.PUBLIC_URL + "/cart?canceled=1",
-        metadata: {orderId: orderDoc._id.toString()},
+        success_url: successUrl,
+        cancel_url: cancelUrl,
+        metadata: { orderId: orderDoc._id.toString() },
         allow_promotion_codes: true,
         shipping_options: [
             {
-            shipping_rate_data: {
-                display_name: 'Shipping fee',
-                type: 'fixed_amount',
-                fixed_amount: {amount: shippingFeeCents, currency: 'BGN'}
+                shipping_rate_data: {
+                    display_name: 'Shipping fee',
+                    type: 'fixed_amount',
+                    fixed_amount: { amount: shippingFeeCents, currency: 'BGN' }
+                }
             }
-        }
-    ]
+        ]
     });
     res.json({
         url: stripeSession.url,
