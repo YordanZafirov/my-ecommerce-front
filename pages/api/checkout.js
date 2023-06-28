@@ -48,8 +48,8 @@ export default async function handler(req, res) {
     const shippingFeeSetting = await Setting.findOne({ name: 'shippingFee' });
     const shippingFeeCents = parseInt(shippingFeeSetting.value || '0') * 100;
 
-    const successUrl = 'my-ecommerce-front-one.vercel.app/cart?success=1';
-    const cancelUrl = 'my-ecommerce-front-one.vercel.app/cart?canceled=1';
+    const successUrl = 'https://my-ecommerce-front-one.vercel.app/cart?success=1';
+    const cancelUrl = 'https://my-ecommerce-front-one.vercel.app/cart?canceled=1';
 
     const stripeSession = await stripe.checkout.sessions.create({
         line_items,
