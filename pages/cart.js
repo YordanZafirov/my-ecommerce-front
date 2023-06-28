@@ -223,11 +223,11 @@ export default function CartPage() {
                     ))}
                     <tr className="subtotal">
                       <td colSpan={2}>Продукти</td>
-                      <td>{productsTotal.toFixed(2)} лв.</td>
+                      <td>{productsTotal?.toFixed(2)} лв.</td>
                     </tr>
                     <tr className="subtotal">
                       <td colSpan={2}>Цена на доставката</td>
-                      <td>{shippingFee.toFixed(2)} лв.</td>
+                      <td>{shippingFee?.toFixed(2)} лв.</td>
                     </tr>
                     <tr className="subtotal total">
                       <td colSpan={2}>Общо</td>
